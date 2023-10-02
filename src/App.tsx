@@ -1,8 +1,12 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import logo from "./logo.svg";
+import "./App.css";
+import { request } from "./requests/requests";
 
 function App() {
+  const data = request();
+  console.log("request >>>>>> ", data);
+
   return (
     <div className="App">
       <header className="App-header">
