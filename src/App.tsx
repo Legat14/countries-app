@@ -1,24 +1,24 @@
 import { useEffect, useState } from "react";
-import "./App.css";
 import { request } from "./requests/requests";
+import { Country } from "./types/types";
 
 function App() {
-  const [data, setData] = useState<{ name: string }[] | null>(null);
+  const [countries, setCountries] = useState<Country[] | null>(null);
 
   useEffect(() => {
-    async function fetchData() {
-      const { data } = await request();
-      setData(data.countries);
+    async function fetchCountries() {
+      const fetchedCountries = await request();
+      setCountries(fetchedCountries);
     }
 
-    fetchData();
+    fetchCountries();
   }, []);
 
   return (
     <div className="App">
       <ul>
-        {data &&
-          data.map((countrie) => {
+        {countries &&
+          countries.map((countrie) => {
             return <li key={countrie.name}>{countrie.name}</li>;
           })}
       </ul>

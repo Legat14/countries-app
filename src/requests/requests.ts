@@ -1,3 +1,5 @@
+import { ResponseData } from "../types/types";
+
 export async function request() {
   const requestUrl = "https://countries.trevorblades.com/graphql";
   const query = `query Query {
@@ -34,9 +36,9 @@ export async function request() {
     body: JSON.stringify({ operationName: "Query", query, variables: {} }),
   });
 
-  const data = await response.json();
+  const responceJSON: ResponseData = await response.json();
 
-  console.log("data >>>>>> ", data);
+  console.log("responceJSON >>>>>> ", responceJSON);
 
-  return data;
+  return responceJSON.data.countries;
 }
