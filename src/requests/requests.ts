@@ -1,7 +1,7 @@
 import { ResponseData } from "../types/types";
 
 export async function request() {
-  const requestUrl = "https://countries.trevorblades.com/graphql";
+  const requestUrl = process.env.REACT_APP_REQUEST_URL;
   const query = `query Query {
     countries {
       code
@@ -28,7 +28,7 @@ export async function request() {
     }
   }`;
 
-  const response = await fetch(requestUrl, {
+  const response = await fetch(requestUrl!, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
