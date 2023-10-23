@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { request } from "./requests/requests";
-import { Country } from "./types/types";
+import { Country, ResponseData } from "./types/types";
 import { convertObjIntoGraphQlRequst } from "./utils";
 
 const queryObj = {
@@ -34,8 +34,10 @@ function App() {
 
   useEffect(() => {
     async function fetchCountries() {
-      const fetchedCountries = await request(queryObj);
-      setCountries(fetchedCountries);
+      const fetchedCountries = (await request(queryObj));
+      if (fetchedCountries && 'countries' in fetchedCountries) {
+        setCountries(fetchedCountries.countries);
+      }
     }
 
     fetchCountries();
