@@ -1,3 +1,4 @@
+import axios from "axios";
 import { ResponseData } from "../types/types";
 import { convertObjIntoGraphQlRequst } from "../utils";
 import { combineErrorMessage } from "./helpers";
@@ -7,14 +8,11 @@ export async function request(obj: object) {
   const query = convertObjIntoGraphQlRequst(obj);
 
   try {
-    const response = await fetch(requestUrl!, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ operationName: "Query", query, variables: {} }),
-    });
-    const responseJSON: ResponseData = await response.json();
+    const response = await axios.post(
+      requestUrl!,
+      { operationName: "Query", query, variables: {} }
+    );
+    const responseJSON: ResponseData = response.data;
 
     if ('errors' in responseJSON) {
       const allErrors = combineErrorMessage(responseJSON);

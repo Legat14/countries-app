@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { request } from "./requests/requests";
-import { Country, ResponseData } from "./types/types";
-import { convertObjIntoGraphQlRequst } from "./utils";
+import { Country } from "./types/types";
 
 const queryObj = {
   countries: {
