@@ -1,3 +1,4 @@
+import styles from "./App.module.scss";
 import { useEffect, useState } from "react";
 import { request } from "./requests/requests";
 import { Country } from "./types/types";
@@ -25,7 +26,7 @@ const queryObj = {
       code: undefined,
       name: undefined,
     },
-  }
+  },
 };
 
 function App() {
@@ -33,8 +34,8 @@ function App() {
 
   useEffect(() => {
     async function fetchCountries() {
-      const fetchedCountries = (await request(queryObj));
-      if (fetchedCountries && 'countries' in fetchedCountries) {
+      const fetchedCountries = await request(queryObj);
+      if (fetchedCountries && "countries" in fetchedCountries) {
         setCountries(fetchedCountries.countries);
       }
     }
@@ -43,11 +44,16 @@ function App() {
   }, []);
 
   return (
-    <div className="App">
+    <div className={styles["app-container"]}>
       <ul>
         {countries &&
           countries.map((countrie) => {
-            return <li key={countrie.name}>{countrie.name}</li>;
+            return (
+              <li key={countrie.name}>
+                {countrie.name}{" "}
+                <span className={styles["flag"]}>{countrie.emoji}</span>
+              </li>
+            );
           })}
       </ul>
     </div>
