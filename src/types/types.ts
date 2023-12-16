@@ -1,3 +1,5 @@
+import { COUNTRIES_LIST_OBJ, LANGUAGES_LIST_OBJ } from "../constants";
+
 export interface Continent {
   code?: string;
   name?: string;
@@ -7,7 +9,7 @@ export interface Language {
   code?: string;
   name?: string;
   native?: string;
-  rtl?: boolean;
+  rtl?: number;
 }
 
 export interface State {
@@ -38,8 +40,19 @@ export interface Error {
   message: string;
 }
 
-export interface OkResponse { data: { countries: Country[] } };
+export enum RequestCategory {
+  COUNTRIES = "countries",
+  LANGUAGES = "languages",
+}
 
-export interface ErrorResponse { errors: Error[] };
+export interface OkResponse {
+  data: { [key: string]: Country[] | Language[] };
+}
+
+export interface ErrorResponse {
+  errors: Error[];
+}
 
 export type ResponseData = OkResponse | ErrorResponse;
+
+export type RequestObj = typeof COUNTRIES_LIST_OBJ | typeof LANGUAGES_LIST_OBJ;

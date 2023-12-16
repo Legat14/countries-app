@@ -1,1 +1,2 @@
-export * from "./convertObjIntoGraphQlRequst";
+export * from "./convertObjIntoGraphQlRequest";
+export * from "./fetchData";

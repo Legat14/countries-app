@@ -1,57 +1,37 @@
 import styles from "./App.module.scss";
 import { useEffect, useState } from "react";
-import { request } from "./requests/requests";
-import { Country } from "./types/types";
-
-const queryObj = {
-  countries: {
-    name: undefined,
-    code: undefined,
-    native: undefined,
-    phone: undefined,
-    currency: undefined,
-    emoji: undefined,
-    emojiU: undefined,
-    continent: {
-      code: undefined,
-      name: undefined,
-    },
-    languages: {
-      code: undefined,
-      name: undefined,
-      native: undefined,
-      rtl: undefined,
-    },
-    states: {
-      code: undefined,
-      name: undefined,
-    },
-  },
-};
+import { Country, Language, RequestCategory } from "./types/types";
+import { fetchData } from "./utils";
 
 function App() {
   const [countries, setCountries] = useState<Country[] | null>(null);
+  const [languages, setLanguages] = useState<Language[] | null>(null);
+
+  console.log("countries >>>>>> ", countries);
+  console.log("languages >>>>>> ", languages);
 
   useEffect(() => {
-    async function fetchCountries() {
-      const fetchedCountries = await request(queryObj);
-      if (fetchedCountries && "countries" in fetchedCountries) {
-        setCountries(fetchedCountries.countries);
-      }
-    }
-
-    fetchCountries();
+    fetchData({
+      requestCategory: RequestCategory.COUNTRIES,
+      setState: setCountries,
+    });
+    fetchData({
+      requestCategory: RequestCategory.LANGUAGES,
+      setState: setLanguages,
+    });
   }, []);
 
   return (
     <div className={styles["app-container"]}>
       <ul>
         {countries &&
-          countries.map((countrie) => {
+          countries.map((country) => {
             return (
-              <li key={countrie.name}>
-                {countrie.name}{" "}
-                <span className={styles["flag"]}>{countrie.emoji}</span>
+              <li key={country.code}>
+                {country.code}
+                {" - "}
+                {country.name}{" "}
+                <span className={styles["flag"]}>{country.emoji}</span>
               </li>
             );
           })}
