@@ -56,3 +56,14 @@ export interface ErrorResponse {
 export type ResponseData = OkResponse | ErrorResponse;
 
 export type RequestObj = typeof COUNTRIES_LIST_OBJ | typeof LANGUAGES_LIST_OBJ;
+
+export interface CustomButton {
+  key?: string | number;
+  label?: string;
+  onClick?: () => void;
+}
+
+export interface FindAllCountriesByLang {
+  countries: Country[] | null;
+  currentLangCode?: string;
+}

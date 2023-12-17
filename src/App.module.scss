@@ -1,4 +1,8 @@
 .app-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
   font-family: "montserrat", sans-serif;
   font-size: 1.5rem;
   font-weight: 400;
