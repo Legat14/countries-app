@@ -2,6 +2,7 @@ import { Dispatch } from "react";
 import { request } from "../requests";
 import { RequestCategory, RequestObj } from "../types";
 import { COUNTRIES_LIST_OBJ, LANGUAGES_LIST_OBJ } from "../constants";
+import { sortListByName } from "./sortListByName";
 
 interface FetchData {
   requestCategory: RequestCategory;
@@ -16,6 +17,7 @@ export async function fetchData({ requestCategory, setState }: FetchData) {
 
   const fetchedData = await request(requestObj);
   if (fetchedData && requestCategory in fetchedData) {
-    setState(fetchedData[requestCategory]);
+    const sortedData = sortListByName(fetchedData[requestCategory]);
+    setState(sortedData);
   }
 }

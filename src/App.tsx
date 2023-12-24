@@ -13,9 +13,6 @@ function App() {
     Country[]
   >([]);
 
-  console.log("countries >>>>>> ", countries);
-  console.log("languages >>>>>> ", languages);
-
   useEffect(() => {
     fetchData({
       requestCategory: RequestCategory.COUNTRIES,
