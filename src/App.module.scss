@@ -1,7 +1,30 @@
 .app-container {
+  height: 100vh;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-evenly;
+  gap: 5px;
   font-family: "montserrat", sans-serif;
   font-size: 1.5rem;
   font-weight: 400;
+  line-height: normal;
+}
+
+.langs-container,
+.results-container {
+  width: 45vw;
+  height: 100%;
+  display: flex;
+  gap: 25px;
+  flex-direction: column;
+  overflow: auto;
+  border: 1px solid var(--border-color);
+}
+
+.langs-list,
+.results-list {
+  display: flex;
+  flex-direction: column;
 }
 
 .flag {
