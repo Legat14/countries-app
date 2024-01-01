@@ -1,5 +1,5 @@
 import styles from "./App.module.scss";
-import { useEffect, useState } from "react";
+import { Fragment, useEffect, useState } from "react";
 import { Country, Language, RequestCategory } from "./types/types";
 import { fetchData } from "./utils";
 import { customButton } from "./components/customButton";
@@ -26,19 +26,30 @@ function App() {
 
   const langBtnsTitle = `Total languages quantity: ${languages?.length}`;
 
+  let currentLetter = "";
   const langBtns = languages
     ? languages.map((language) => {
         const { code, name } = language;
-        return customButton({
-          key: code,
-          label: `${name} - ${code}`,
-          onClick: () => {
-            setCurrentLang(language);
-            setCountriesWithCurrentLang(
-              findAllCountriesByLang({ countries, currentLangCode: code })
-            );
-          },
-        });
+        let needToRenderNewCategory = false;
+        if (name && currentLetter !== name[0]) {
+          currentLetter = name[0].toUpperCase();
+          needToRenderNewCategory = true;
+        }
+        return (
+          <Fragment key={code}>
+            {needToRenderNewCategory && <div>{currentLetter}</div>}
+            {customButton({
+              key: code,
+              label: `${name} - ${code}`,
+              onClick: () => {
+                setCurrentLang(language);
+                setCountriesWithCurrentLang(
+                  findAllCountriesByLang({ countries, currentLangCode: code })
+                );
+              },
+            })}
+          </Fragment>
+        );
       })
     : null;
 
