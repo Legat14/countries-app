@@ -2,7 +2,7 @@ import { Country } from "./requests-types";
 
 export interface CustomButton {
   key?: string | number;
-  label?: string;
+  label?: string | JSX.Element;
   onClick?: () => void;
 }
 
