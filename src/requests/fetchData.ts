@@ -1,13 +1,7 @@
-import { Dispatch } from "react";
 import { request } from "../requests";
-import { RequestCategory, RequestObj } from "../types";
+import { FetchData, RequestCategory, RequestObj } from "../types";
 import { COUNTRIES_LIST_OBJ, LANGUAGES_LIST_OBJ } from "../constants";
-import { sortListByName } from "./sortListByName";
-
-interface FetchData {
-  requestCategory: RequestCategory;
-  setState: Dispatch<React.SetStateAction<any>>;
-}
+import { sortListByName } from "../utils";
 
 export async function fetchData({ requestCategory, setState }: FetchData) {
   let requestObj: RequestObj = COUNTRIES_LIST_OBJ;

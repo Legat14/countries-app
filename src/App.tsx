@@ -1,7 +1,7 @@
 import styles from "./App.module.scss";
 import { Fragment, useEffect, useState } from "react";
-import { Country, Language, RequestCategory } from "./types/types";
-import { fetchData } from "./utils";
+import { Country, Language, RequestCategory } from "./types";
+import { fetchData } from "./requests";
 import { customButton } from "./components/customButton";
 import { findAllCountriesByLang } from "./utils";
 

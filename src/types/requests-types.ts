@@ -1,3 +1,4 @@
+import { Dispatch } from "react";
 import { COUNTRIES_LIST_OBJ, LANGUAGES_LIST_OBJ } from "../constants";
 
 export interface Continent {
@@ -57,13 +58,7 @@ export type ResponseData = OkResponse | ErrorResponse;
 
 export type RequestObj = typeof COUNTRIES_LIST_OBJ | typeof LANGUAGES_LIST_OBJ;
 
-export interface CustomButton {
-  key?: string | number;
-  label?: string;
-  onClick?: () => void;
-}
-
-export interface FindAllCountriesByLang {
-  countries: Country[] | null;
-  currentLangCode?: string;
+export interface FetchData {
+  requestCategory: RequestCategory;
+  setState: Dispatch<React.SetStateAction<any>>;
 }
