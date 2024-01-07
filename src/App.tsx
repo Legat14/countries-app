@@ -3,7 +3,12 @@ import { useEffect, useState } from "react";
 import { ICountry, ILanguage, RequestCategory } from "./types";
 import { fetchData } from "./requests";
 import { findAllCountriesByLang } from "./utils";
-import { BtnsContainer, BtnsCounter, ResultContainer } from "./components";
+import {
+  BtnsContainer,
+  BtnsCounter,
+  ResultContainer,
+  ResultsCounter,
+} from "./components";
 
 function App() {
   const [currentTab, setCurrentTab] = useState(RequestCategory.COUNTRIES);
@@ -11,10 +16,10 @@ function App() {
   const [languages, setLanguages] = useState<ILanguage[] | undefined>(
     undefined
   );
-  const [currentLang, setCurrentLang] = useState<ILanguage | undefined>(
+  const [currentCountry, setCurrentCountry] = useState<ICountry | undefined>(
     undefined
   );
-  const [currentCountry, setCurrentCountry] = useState<ICountry | undefined>(
+  const [currentLang, setCurrentLang] = useState<ILanguage | undefined>(
     undefined
   );
   const [countriesWithCurrentLang, setCountriesWithCurrentLang] = useState<
@@ -34,14 +39,6 @@ function App() {
       setState: setLanguages,
     });
   }, []);
-
-  const resultTitle = currentLang
-    ? `There ${countriesWithCurrentLang.length > 1 ? "are" : "is"} ${
-        countriesWithCurrentLang.length
-      } ${
-        countriesWithCurrentLang.length > 1 ? "countries" : "country"
-      } in the World, speaking on ${currentLang.name} language: `
-    : "Choose a language";
 
   return (
     <div className={styles["app_container"]}>
@@ -77,7 +74,13 @@ function App() {
         </div>
       </div>
       <div className={styles["results_container"]}>
-        <span>{resultTitle}</span>
+        <ResultsCounter
+          currentTab={currentTab}
+          currentCountry={currentCountry}
+          currentLang={currentLang}
+          countriesWithCurrentLang={countriesWithCurrentLang}
+          langsOfCurrentCountry={langsOfCurrentCountry}
+        />
         <ResultContainer
           currentTab={currentTab}
           countriesWithCurrentLang={countriesWithCurrentLang}

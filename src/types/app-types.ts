@@ -13,6 +13,14 @@ export interface IBtnsCounter {
   languages?: ILanguage[];
 }
 
+export interface IResultsCounter {
+  currentTab: RequestCategory;
+  currentCountry?: ICountry;
+  currentLang?: ILanguage;
+  countriesWithCurrentLang?: ICountry[];
+  langsOfCurrentCountry?: ILanguage[];
+}
+
 export interface IFindAllCountriesByLang {
   countries: ICountry[] | undefined;
   currentLangCode?: string;
