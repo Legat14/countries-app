@@ -1,17 +1,19 @@
-import { FindAllCountriesByLang } from "../types";
+import { IFindAllCountriesByLang } from "../types";
 
 export function findAllCountriesByLang({
   countries,
   currentLangCode,
-}: FindAllCountriesByLang) {
+}: IFindAllCountriesByLang) {
   if (!countries || !currentLangCode) return [];
 
   const countriesWithCurrentLang = countries.filter((country) => {
     const { languages } = country;
-    const hasCurrentLang = languages?.filter((language) => {
+    const countriesThatHasCurrentLang = languages?.filter((language) => {
       return language.code === currentLangCode;
     });
-    return hasCurrentLang && hasCurrentLang.length > 0;
+    return (
+      countriesThatHasCurrentLang && countriesThatHasCurrentLang.length > 0
+    );
   });
   return countriesWithCurrentLang;
 }

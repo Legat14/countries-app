@@ -1,43 +1,43 @@
 import { Dispatch } from "react";
 import { COUNTRIES_LIST_OBJ, LANGUAGES_LIST_OBJ } from "../constants";
 
-export interface Continent {
+export interface IContinent {
   code?: string;
   name?: string;
 }
 
-export interface Language {
+export interface ILanguage {
   code?: string;
   name?: string;
   native?: string;
   rtl?: number;
 }
 
-export interface State {
+export interface IState {
   code?: string;
   name?: string;
 }
 
-export interface Country {
+export interface ICountry {
   code?: string;
-  continent?: Continent[];
+  continent?: IContinent[];
   currency?: string;
   emoji?: string;
   emojiU?: string;
-  languages?: Language[];
+  languages?: ILanguage[];
   name?: string;
   native?: string;
   phone?: string;
-  states?: State[];
+  states?: IState[];
 }
 
-export interface Location {
+export interface ILocation {
   line: number;
   column: number;
 }
 
-export interface Error {
-  locations: Location[];
+export interface IError {
+  locations: ILocation[];
   message: string;
 }
 
@@ -46,19 +46,19 @@ export enum RequestCategory {
   LANGUAGES = "languages",
 }
 
-export interface OkResponse {
-  data: { [key: string]: Country[] | Language[] };
+export interface IOkResponse {
+  data: { [key: string]: ICountry[] | ILanguage[] };
 }
 
-export interface ErrorResponse {
-  errors: Error[];
+export interface IErrorResponse {
+  errors: IError[];
 }
 
-export type ResponseData = OkResponse | ErrorResponse;
+export type ResponseData = IOkResponse | IErrorResponse;
 
 export type RequestObj = typeof COUNTRIES_LIST_OBJ | typeof LANGUAGES_LIST_OBJ;
 
-export interface FetchData {
+export interface IFetchData {
   requestCategory: RequestCategory;
   setState: Dispatch<React.SetStateAction<any>>;
 }
