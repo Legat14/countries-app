@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { ICountry, ILanguage, RequestCategory } from "./types";
 import { fetchData } from "./requests";
 import { findAllCountriesByLang } from "./utils";
-import { BtnsContainer, ResultContainer } from "./components";
+import { BtnsContainer, BtnsCounter, ResultContainer } from "./components";
 
 function App() {
   const [currentTab, setCurrentTab] = useState(RequestCategory.COUNTRIES);
@@ -59,10 +59,15 @@ function App() {
           Languages
         </button>
         <div className={styles["btns_container"]}>
-          <BtnsContainer
+          <BtnsCounter
+            currentTab={currentTab}
             countries={countries}
             languages={languages}
+          />
+          <BtnsContainer
             currentTab={currentTab}
+            countries={countries}
+            languages={languages}
             setCurrentCountry={setCurrentCountry}
             setLangsOfCurrentCountry={setLangsOfCurrentCountry}
             setCurrentLang={setCurrentLang}
@@ -75,8 +80,8 @@ function App() {
         <span>{resultTitle}</span>
         <ResultContainer
           currentTab={currentTab}
-          langsOfCurrentCountry={langsOfCurrentCountry}
           countriesWithCurrentLang={countriesWithCurrentLang}
+          langsOfCurrentCountry={langsOfCurrentCountry}
         />
       </div>
     </div>

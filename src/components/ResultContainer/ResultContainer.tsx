@@ -3,8 +3,8 @@ import { IResultContainer, RequestCategory } from "../../types";
 
 export function ResultContainer({
   currentTab,
-  langsOfCurrentCountry,
   countriesWithCurrentLang,
+  langsOfCurrentCountry,
 }: IResultContainer) {
   let results = null;
   if (langsOfCurrentCountry && currentTab === RequestCategory.COUNTRIES) {

@@ -1,3 +1,4 @@
 export * from "./BtnsContainer";
 export * from "./ResultContainer";
-export * from "./CustomButton";
+export * from "./BtnsCounter";
+export * from "./CustomBtn";

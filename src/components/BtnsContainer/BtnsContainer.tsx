@@ -1,12 +1,12 @@
 import styles from "./BtnsContainer.module.scss";
 import { Fragment } from "react";
 import { IBtnsContainer, RequestCategory } from "../../types";
-import { CustomButton } from "../CustomButton";
+import { CustomBtn } from "../CustomBtn";
 
 export function BtnsContainer({
   currentTab,
-  languages,
   countries,
+  languages,
   setCurrentCountry,
   setLangsOfCurrentCountry,
   setCurrentLang,
@@ -28,7 +28,7 @@ export function BtnsContainer({
           {needToRenderNewCategory ? (
             <p className={styles["category"]}>{`-${currentLetter}-`}</p>
           ) : null}
-          {CustomButton({
+          {CustomBtn({
             key: code,
             label: (
               <span>
@@ -57,7 +57,7 @@ export function BtnsContainer({
           {needToRenderNewCategory ? (
             <p className={styles["category"]}>{`-${currentLetter}-`}</p>
           ) : null}
-          {CustomButton({
+          {CustomBtn({
             key: code,
             label: `${name} (${code?.toUpperCase()})`,
             onClick: () => {
