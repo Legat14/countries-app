@@ -1,4 +1,4 @@
-.app-container {
+.app_container {
   height: 100vh;
   display: flex;
   align-items: flex-start;
@@ -10,8 +10,12 @@
   line-height: normal;
 }
 
-.langs-container,
-.results-container {
+.request_container {
+  height: 90%;
+}
+
+.btns_container,
+.results_container {
   width: 45vw;
   height: 100%;
   display: flex;
@@ -21,12 +25,7 @@
   border: 1px solid var(--border-color);
 }
 
-.langs-list,
-.results-list {
+.results_list {
   display: flex;
   flex-direction: column;
-}
-
-.flag {
-  font-family: "twemoji", serif;
 }

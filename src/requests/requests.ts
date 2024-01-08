@@ -1,7 +1,7 @@
 import axios from "axios";
 import { convertObjIntoGraphQlRequest } from "../utils";
 import { combineErrorMessage } from "./helpers";
-import { RequestObj, ResponseData } from "../types/types";
+import { RequestObj, ResponseData } from "../types";
 
 export async function request(obj: RequestObj) {
   const requestUrl = process.env.REACT_APP_REQUEST_URL;

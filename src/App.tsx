@@ -1,16 +1,33 @@
 import styles from "./App.module.scss";
-import { Fragment, useEffect, useState } from "react";
-import { Country, Language, RequestCategory } from "./types/types";
-import { fetchData } from "./utils";
-import { customButton } from "./components/customButton";
+import { useEffect, useState } from "react";
+import { ICountry, ILanguage, RequestCategory } from "./types";
+import { fetchData } from "./requests";
 import { findAllCountriesByLang } from "./utils";
+import {
+  BtnsCounter,
+  ResultContainer,
+  TabBtns,
+  BtnsContainer,
+  ResultsCounter,
+} from "./components";
 
 function App() {
-  const [countries, setCountries] = useState<Country[] | null>(null);
-  const [languages, setLanguages] = useState<Language[] | null>(null);
-  const [currentLang, setCurrentLang] = useState<Language | null>(null);
+  const [currentTab, setCurrentTab] = useState(RequestCategory.COUNTRIES);
+  const [countries, setCountries] = useState<ICountry[] | undefined>(undefined);
+  const [languages, setLanguages] = useState<ILanguage[] | undefined>(
+    undefined
+  );
+  const [currentCountry, setCurrentCountry] = useState<ICountry | undefined>(
+    undefined
+  );
+  const [currentLang, setCurrentLang] = useState<ILanguage | undefined>(
+    undefined
+  );
   const [countriesWithCurrentLang, setCountriesWithCurrentLang] = useState<
-    Country[]
+    ICountry[]
+  >([]);
+  const [langsOfCurrentCountry, setLangsOfCurrentCountry] = useState<
+    ILanguage[] | undefined
   >([]);
 
   useEffect(() => {
@@ -24,66 +41,47 @@ function App() {
     });
   }, []);
 
-  const langBtnsTitle = `Total languages quantity: ${languages?.length}`;
-
-  let currentLetter = "";
-  const langBtns = languages
-    ? languages.map((language) => {
-        const { code, name } = language;
-        let needToRenderNewCategory = false;
-        if (name && currentLetter !== name[0]) {
-          currentLetter = name[0].toUpperCase();
-          needToRenderNewCategory = true;
-        }
-        return (
-          <Fragment key={code}>
-            {needToRenderNewCategory && <div>{currentLetter}</div>}
-            {customButton({
-              key: code,
-              label: `${name} - ${code}`,
-              onClick: () => {
-                setCurrentLang(language);
-                setCountriesWithCurrentLang(
-                  findAllCountriesByLang({ countries, currentLangCode: code })
-                );
-              },
-            })}
-          </Fragment>
-        );
-      })
-    : null;
-
-  const resultTitle = currentLang
-    ? `There ${countriesWithCurrentLang.length > 1 ? "are" : "is"} ${
-        countriesWithCurrentLang.length
-      } ${
-        countriesWithCurrentLang.length > 1 ? "countries" : "country"
-      } in the World, speaking on ${currentLang.name} language: `
-    : "Choose a language";
-
-  const result =
-    countriesWithCurrentLang &&
-    countriesWithCurrentLang.map((country, index) => {
-      return (
-        <div key={country.code}>
-          {index + 1}
-          {" - "}
-          {country.code}
-          {" - "}
-          {country.name} <span className={styles["flag"]}>{country.emoji}</span>
-        </div>
-      );
-    });
-
   return (
-    <div className={styles["app-container"]}>
-      <div className={styles["langs-container"]}>
-        <span>{langBtnsTitle}</span>
-        <div className={styles["langs-list"]}>{langBtns}</div>
+    <div className={styles["app_container"]}>
+      <div className={styles["request_container"]}>
+        <TabBtns
+          setCurrentTab={setCurrentTab}
+          setCurrentCountry={setCurrentCountry}
+          setCurrentLang={setCurrentLang}
+          setLangsOfCurrentCountry={setLangsOfCurrentCountry}
+          setCountriesWithCurrentLang={setCountriesWithCurrentLang}
+        />
+        <div className={styles["btns_container"]}>
+          <BtnsCounter
+            currentTab={currentTab}
+            countries={countries}
+            languages={languages}
+          />
+          <BtnsContainer
+            currentTab={currentTab}
+            countries={countries}
+            languages={languages}
+            setCurrentCountry={setCurrentCountry}
+            setLangsOfCurrentCountry={setLangsOfCurrentCountry}
+            setCurrentLang={setCurrentLang}
+            setCountriesWithCurrentLang={setCountriesWithCurrentLang}
+            findAllCountriesByLang={findAllCountriesByLang}
+          />
+        </div>
       </div>
-      <div className={styles["results-container"]}>
-        <span>{resultTitle}</span>
-        <div className={styles["results-list"]}>{result}</div>
+      <div className={styles["results_container"]}>
+        <ResultsCounter
+          currentTab={currentTab}
+          currentCountry={currentCountry}
+          currentLang={currentLang}
+          countriesWithCurrentLang={countriesWithCurrentLang}
+          langsOfCurrentCountry={langsOfCurrentCountry}
+        />
+        <ResultContainer
+          currentTab={currentTab}
+          countriesWithCurrentLang={countriesWithCurrentLang}
+          langsOfCurrentCountry={langsOfCurrentCountry}
+        />
       </div>
     </div>
   );

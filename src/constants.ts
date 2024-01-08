@@ -32,6 +32,7 @@ export const COUNTRIES_LIST_OBJ = {
     code: undefined,
     emoji: undefined,
     languages: {
+      name: undefined,
       code: undefined,
     },
   },
