@@ -17,11 +17,11 @@ export function ResultsCounter({
     currentCountry &&
     currentTab === RequestCategory.COUNTRIES
   ) {
-    const langsLength = langsOfCurrentCountry.length;
+    const totalLangs = langsOfCurrentCountry.length;
     CounterText = (
       <h3>
-        There {langsLength > 1 ? "are" : "is"} <b>{langsLength}</b> languages in
-        the <b>{currentCountry.name}</b>
+        There {totalLangs > 1 ? "are" : "is"} <b>{totalLangs}</b> languages
+        spoken in <b>{currentCountry.name}</b>
       </h3>
     );
   } else if (
@@ -29,10 +29,10 @@ export function ResultsCounter({
     countriesWithCurrentLang &&
     currentTab === RequestCategory.LANGUAGES
   ) {
-    const countriesLength = countriesWithCurrentLang.length;
+    const totalCountries = countriesWithCurrentLang.length;
     CounterText = (
       <h3>
-        There {countriesLength > 1 ? "are" : "is"} <b>{countriesLength}</b>{" "}
+        There {totalCountries > 1 ? "are" : "is"} <b>{totalCountries}</b>{" "}
         countries where <b>{currentLang.name}</b> is spoken
       </h3>
     );
