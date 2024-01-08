@@ -4,9 +4,10 @@ import { ICountry, ILanguage, RequestCategory } from "./types";
 import { fetchData } from "./requests";
 import { findAllCountriesByLang } from "./utils";
 import {
-  BtnsContainer,
   BtnsCounter,
   ResultContainer,
+  TabBtns,
+  BtnsContainer,
   ResultsCounter,
 } from "./components";
 
@@ -43,18 +44,13 @@ function App() {
   return (
     <div className={styles["app_container"]}>
       <div className={styles["request_container"]}>
-        <button
-          type="button"
-          onClick={() => setCurrentTab(RequestCategory.COUNTRIES)}
-        >
-          Countries
-        </button>
-        <button
-          type="button"
-          onClick={() => setCurrentTab(RequestCategory.LANGUAGES)}
-        >
-          Languages
-        </button>
+        <TabBtns
+          setCurrentTab={setCurrentTab}
+          setCurrentCountry={setCurrentCountry}
+          setCurrentLang={setCurrentLang}
+          setLangsOfCurrentCountry={setLangsOfCurrentCountry}
+          setCountriesWithCurrentLang={setCountriesWithCurrentLang}
+        />
         <div className={styles["btns_container"]}>
           <BtnsCounter
             currentTab={currentTab}

@@ -1,4 +1,4 @@
-import { Dispatch } from "react";
+import { Dispatch, SetStateAction } from "react";
 import { ICountry, ILanguage, RequestCategory } from "./requests-types";
 
 export interface ICustomBtn {
@@ -11,6 +11,16 @@ export interface IBtnsCounter {
   currentTab: RequestCategory;
   countries?: ICountry[];
   languages?: ILanguage[];
+}
+
+export interface ITabBtns {
+  setCurrentTab: (value: SetStateAction<RequestCategory>) => void;
+  setCurrentCountry: Dispatch<React.SetStateAction<ICountry | undefined>>;
+  setCurrentLang: Dispatch<React.SetStateAction<ILanguage | undefined>>;
+  setLangsOfCurrentCountry: Dispatch<
+    React.SetStateAction<ILanguage[] | undefined>
+  >;
+  setCountriesWithCurrentLang: Dispatch<React.SetStateAction<ICountry[]>>;
 }
 
 export interface IResultsCounter {
